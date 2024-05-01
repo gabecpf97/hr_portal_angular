@@ -1,0 +1,9 @@
+<div>
+  <h2>Welcome</h2>
+  <button *ngIf="isLoggedIn()" mat-button color="primary" (click)="logout()">
+    Logout
+  </button>
+  <button *ngIf="!isLoggedIn()" mat-button color="primary" (click)="toLogin()">
+    Login
+  </button>
+</div>
