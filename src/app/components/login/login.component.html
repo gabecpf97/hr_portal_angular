@@ -1,0 +1,31 @@
+<div class="login-container">
+  <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+    <div>
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input id="username" name="username" ngModel required matInput />
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label for="password">Password</mat-label>
+        <input
+          matInput
+          type="password"
+          id="password"
+          name="password"
+          ngModel
+          required
+        />
+      </mat-form-field>
+    </div>
+    <button
+      type="submit"
+      [disabled]="!loginForm.valid"
+      mat-button
+      color="primary"
+    >
+      Login
+    </button>
+  </form>
+</div>
