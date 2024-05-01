@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, public authService: AuthService) {}
 
   ngOnInit(): void {}
-  isLoggedIn(): boolean {
-    // Check if the auth token exists in local storage
-    return !!localStorage.getItem('authToken');
+
+  get username(): string | null {
+    return this.authService.getUsername();
   }
 
   toLogin() {
@@ -20,8 +21,9 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
-    // Remove the token from local storage
+    // Remove the token and username from local storage
     localStorage.removeItem('authToken');
+    localStorage.removeItem('username');
     // redirect the user to the login page
     this.router.navigate(['/login']);
   }

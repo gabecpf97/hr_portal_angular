@@ -17,6 +17,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { EmployeeProfilesComponent } from './employee-profiles/employee-profiles.component';
+import { VisaStatusManagementComponent } from './visa-status-management/visa-status-management.component';
+import { HiringManagementComponent } from './hiring-management/hiring-management.component';
+import { HousingManagementComponent } from './housing-management/housing-management.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +29,10 @@ import { MatIconModule } from '@angular/material/icon';
     LoginComponent,
     HomeComponent,
     PageNotFoundComponent,
+    EmployeeProfilesComponent,
+    VisaStatusManagementComponent,
+    HiringManagementComponent,
+    HousingManagementComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +45,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     HttpClientModule,
     FormsModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

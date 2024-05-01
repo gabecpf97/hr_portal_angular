@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('authToken')) {
+    if (this.authService.isLoggedIn()) {
       this.router.navigate(['']);
     }
   }
@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
       next: (response) => {
         if (response.isHR) {
           localStorage.setItem('authToken', response.token);
+          localStorage.setItem('username', response.username);
           const user: User = { username: response.username };
           this.store.dispatch(addUser({ user }));
           this.router.navigate(['']);
