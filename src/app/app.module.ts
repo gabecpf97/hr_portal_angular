@@ -10,7 +10,7 @@ import { userReducer } from './store/user/user.reducer';
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -30,7 +30,12 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 
 import { FilterPipe } from './pipes/filter.pipe';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { visaReducer } from './store/visa/visa.reducer';
+import { VisaInProcessComponent } from './components/visa-in-process/visa-in-process.component';
+import { VisaAllSearchComponent } from './components/visa-all-search/visa-all-search.component';
+import { VisaItemComponent } from './components/visa-item/visa-item.component';
 import { EmployeeEntireProfileComponent } from './components/employee-entire-profile/employee-entire-profile.component';
+import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 
 @NgModule({
   declarations: [
@@ -44,11 +49,15 @@ import { EmployeeEntireProfileComponent } from './components/employee-entire-pro
     HousingManagementComponent,
     FilterPipe,
     EmployeeEntireProfileComponent,
+    VisaInProcessComponent,
+    VisaAllSearchComponent,
+    VisaItemComponent,
+    FeedbackFormComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ user: userReducer }),
+    StoreModule.forRoot({ user: userReducer, visa: visaReducer }),
     BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
@@ -61,6 +70,7 @@ import { EmployeeEntireProfileComponent } from './components/employee-entire-pro
     MatDialogModule,
     MatDividerModule,
     MatListModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {

@@ -1,0 +1,11 @@
+<div class="visa-all-search">
+  <h3>All Visa Request</h3>
+  <form [formGroup]="form" (ngSubmit)="handleSearch()">
+    <label>Search: </label>
+    <input type="text" formControlName="query" />
+    <button type="submit">Search</button>
+  </form>
+  <div class="display-visa-search">
+    <app-visa-item *ngFor="let visa of visaList" [visa]="visa"></app-visa-item>
+  </div>
+</div>
