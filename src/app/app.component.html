@@ -7,17 +7,33 @@
   </ng-template>
   <span style="flex: 1 1 auto"></span>
   <ng-container *ngIf="authService.isLoggedIn()">
-    <button mat-button routerLink="/">Home</button>
-    <button mat-button routerLink="/employee-profiles">
+    <button mat-button [disabled]="homeActive" routerLink="/">Home</button>
+    <button
+      mat-button
+      [disabled]="employeeProfilesListActive"
+      routerLink="/employee-profiles"
+    >
       Employee Profiles
     </button>
-    <button mat-button routerLink="/visa-status-management">
+    <button
+      mat-button
+      [disabled]="visaStatusManagementActive"
+      routerLink="/visa-status-management"
+    >
       Visa Status Management
     </button>
-    <button mat-button routerLink="/hiring-management">
+    <button
+      mat-button
+      [disabled]="hiringManagementActive"
+      routerLink="/hiring-management"
+    >
       Hiring Management
     </button>
-    <button mat-button routerLink="/housing-management">
+    <button
+      mat-button
+      [disabled]="housingManagementActive"
+      routerLink="/housing-management"
+    >
       Housing Management
     </button>
     <button mat-button (click)="authService.logout()">Logout</button>
