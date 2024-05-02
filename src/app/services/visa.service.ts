@@ -29,18 +29,24 @@ export class VisaService {
   }
 
   getVisaAll(query: string): Observable<visa[]> {
-    return this.http.get<any>(`${this.url}/${query}`).pipe(
-      catchError((err) => {
-        console.log('error in fetching all visa', err);
-        return of([]);
-      }),
-      map((response: { requests: visa[] }) => {
-        if (response && response.requests) {
-          return response.requests;
-        } else {
-          return [];
-        }
+    return this.http
+      .get<any>(`${this.url}/${query}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+        },
       })
-    );
+      .pipe(
+        catchError((err) => {
+          console.log('error in fetching all visa', err);
+          return of([]);
+        }),
+        map((response: { requests: visa[] }) => {
+          if (response && response.requests) {
+            return response.requests;
+          } else {
+            return [];
+          }
+        })
+      );
   }
 }
