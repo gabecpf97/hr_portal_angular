@@ -17,12 +17,4 @@ export class AppComponent {
   toLogin() {
     this.router.navigate(['/login']);
   }
-
-  logout() {
-    // Remove the token and username from local storage
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('username');
-    // redirect the user to the login page
-    this.router.navigate(['/login']);
-  }
 }
