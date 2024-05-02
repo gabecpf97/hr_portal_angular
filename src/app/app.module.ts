@@ -33,7 +33,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { visaReducer } from './store/visa/visa.reducer';
 import { VisaInProcessComponent } from './components/visa-in-process/visa-in-process.component';
 import { VisaAllSearchComponent } from './components/visa-all-search/visa-all-search.component';
-import { VisaSearchComponent } from './components/visa-search/visa-search.component';
+import { VisaItemComponent } from './components/visa-item/visa-item.component';
 import { EmployeeEntireProfileComponent } from './components/employee-entire-profile/employee-entire-profile.component';
 
 @NgModule({
@@ -50,7 +50,7 @@ import { EmployeeEntireProfileComponent } from './components/employee-entire-pro
     EmployeeEntireProfileComponent,
     VisaInProcessComponent,
     VisaAllSearchComponent,
-    VisaSearchComponent,
+    VisaItemComponent,
   ],
   imports: [
     BrowserModule,

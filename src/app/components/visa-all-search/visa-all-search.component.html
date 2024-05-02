@@ -4,5 +4,7 @@
     <input type="text" formControlName="query" />
     <button type="submit">Search</button>
   </form>
-  <div class="display-visa-search"></div>
+  <div class="display-visa-search">
+    <app-visa-item *ngFor="let visa of visaList" [visa]="visa"></app-visa-item>
+  </div>
 </div>
