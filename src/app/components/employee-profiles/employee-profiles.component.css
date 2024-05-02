@@ -1,3 +1,10 @@
 table {
   width: 100%;
 }
+
+.name {
+  width: 100px;
+}
+.name:hover {
+  cursor: pointer;
+}

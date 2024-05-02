@@ -17,6 +17,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 
 import { EmployeeProfilesComponent } from './components/employee-profiles/employee-profiles.component';
 import { VisaStatusManagementComponent } from './components/visa-status-management/visa-status-management.component';
@@ -27,6 +30,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 
 import { FilterPipe } from './pipes/filter.pipe';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { EmployeeEntireProfileComponent } from './components/employee-entire-profile/employee-entire-profile.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     HiringManagementComponent,
     HousingManagementComponent,
     FilterPipe,
+    EmployeeEntireProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,9 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     HttpClientModule,
     FormsModule,
     MatToolbarModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatListModule,
   ],
   providers: [
     {

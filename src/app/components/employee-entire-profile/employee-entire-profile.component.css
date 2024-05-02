@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile-container {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.document-image {
+  margin-left: 20px;
+}
