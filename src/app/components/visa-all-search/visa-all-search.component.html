@@ -1,0 +1,8 @@
+<div class="visa-all-search">
+  <form [formGroup]="form" (ngSubmit)="handleSearch()">
+    <label>Search: </label>
+    <input type="text" formControlName="query" />
+    <button type="submit">Search</button>
+  </form>
+  <div class="display-visa-search"></div>
+</div>
