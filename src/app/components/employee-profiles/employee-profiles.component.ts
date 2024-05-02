@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Employee } from 'src/app/interfaces/employee';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { EmployeeEntireProfileComponent } from '../employee-entire-profile/employee-entire-profile.component';
+
 @Component({
   selector: 'app-employee-profiles',
   templateUrl: './employee-profiles.component.html',
@@ -16,11 +19,13 @@ export class EmployeeProfilesComponent implements OnInit {
     'workAuthorization',
     'cellPhone',
     'email',
-    'viewProfile',
   ];
   totalEmployees: number = 0;
 
-  constructor(private employeeService: EmployeeService) {
+  constructor(
+    private employeeService: EmployeeService,
+    public dialog: MatDialog
+  ) {
     this.dataSource = new MatTableDataSource<Employee>();
   }
   ngOnInit(): void {
@@ -34,20 +39,18 @@ export class EmployeeProfilesComponent implements OnInit {
         this.totalEmployees = 0;
       }
     });
-
-    // this.employees$.subscribe({
-    //   next: (employees) => {
-    //     console.log('Employees:', employees);
-    //   },
-    //   error: (error) => {
-    //     console.error('Error fetching employees:', error);
-    //   },
-    // });
   }
 
   onSearchInputChange(): void {
     const searchTerm = this.searchInput.toLowerCase().trim();
     this.dataSource.filter = searchTerm;
     this.totalEmployees = this.dataSource.filteredData.length;
+  }
+
+  openProfileModal(employee: Employee): void {
+    const dialogRef = this.dialog.open(EmployeeEntireProfileComponent, {
+      width: '600px',
+      data: employee, // Pass employee data to modal
+    });
   }
 }
