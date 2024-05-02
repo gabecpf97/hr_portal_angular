@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { catchError, of } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { visa } from 'src/app/interfaces/visa';
 
 @Component({

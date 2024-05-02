@@ -1,5 +1,8 @@
 export interface visa {
-  appId: string;
+  appId: {
+    firstName: string;
+    lastName: string;
+  };
   step: string;
   OPTReceipt: {
     status: string;

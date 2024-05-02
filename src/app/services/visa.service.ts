@@ -29,8 +29,12 @@ export class VisaService {
   }
 
   getVisaAll(query: string): Observable<visa[]> {
+    let search = `firstName=${query}&lastName=${query}&preferredName=${query}`;
+    if (query.length < 1) {
+      search = 'all="true"';
+    }
     return this.http
-      .get<any>(`${this.url}/${query}`, {
+      .get<any>(`${this.url}/?${search}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('authToken')}`,
         },

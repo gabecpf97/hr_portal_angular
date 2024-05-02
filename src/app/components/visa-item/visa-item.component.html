@@ -1,4 +1,5 @@
 <div class="visa-item">
+  <p>Employee: {{ visa.appId.firstName }} {{ visa.appId.lastName }}</p>
   <p>Step: {{ visa.step }}</p>
   <div *ngIf="visa.OPTReceipt.status !== 'unuploaded'">
     <p>OPTReceipt:</p>
