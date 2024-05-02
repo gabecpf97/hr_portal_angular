@@ -30,6 +30,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 
 import { FilterPipe } from './pipes/filter.pipe';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { visaReducer } from './store/visa/visa.reducer';
 import { EmployeeEntireProfileComponent } from './components/employee-entire-profile/employee-entire-profile.component';
 
 @NgModule({
@@ -48,7 +49,7 @@ import { EmployeeEntireProfileComponent } from './components/employee-entire-pro
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ user: userReducer }),
+    StoreModule.forRoot({ user: userReducer, visa: visaReducer }),
     BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
