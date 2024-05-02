@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { catchError, of } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { Subscription, catchError, of } from 'rxjs';
 import { visa } from 'src/app/interfaces/visa';
+import { selectVisaById } from 'src/app/store/visa/visa.selector';
 
 @Component({
   selector: 'app-visa-item',
@@ -10,8 +12,10 @@ import { visa } from 'src/app/interfaces/visa';
 })
 export class VisaItemComponent implements OnInit {
   @Input() visa: visa;
+  @Input() visaId: string;
+  currentVisa: Subscription | undefined;
   notiSent: boolean = false;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store<visa[]>) {}
 
   handleSendNoti(): void {
     this.http
@@ -33,5 +37,16 @@ export class VisaItemComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.visaId) {
+      this.currentVisa = this.store
+        .select(selectVisaById(this.visaId))
+        .subscribe({
+          next: (visa) => {
+            if (!visa) return;
+            this.visa = visa;
+          },
+        });
+    }
+  }
 }

@@ -8,8 +8,13 @@ export const selectVisaIds = createSelector(selectVisaState, (state) =>
   state.map((visa) => visa._id)
 );
 
-export const selectVisaById = (id: string) => {
+export const selectVisaById = (id: string) =>
   createSelector(selectVisaState, (state) =>
     state.find((visa) => visa._id === id)
   );
-};
+
+export const selectInProcessIds = createSelector(selectVisaState, (state) =>
+  state
+    .filter((visa) => visa?.I20.status !== 'approved')
+    .map((visa) => visa._id)
+);

@@ -1,1 +1,6 @@
-<div class="visa_in_process"></div>
+<div class="visa_in_process">
+  <h3>In process Visa Request</h3>
+  <div *ngIf="theList$ | async as visaIds">
+    <app-visa-item *ngFor="let id of visaIds" [visaId]="id"></app-visa-item>
+  </div>
+</div>

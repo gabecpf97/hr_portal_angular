@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { visa } from 'src/app/interfaces/visa';
-import { VisaService } from 'src/app/services/visa.service';
+import {
+  selectInProcessIds,
+  selectVisaIds,
+} from 'src/app/store/visa/visa.selector';
 
 @Component({
   selector: 'app-visa-in-process',
@@ -8,17 +13,11 @@ import { VisaService } from 'src/app/services/visa.service';
   styleUrls: ['./visa-in-process.component.css'],
 })
 export class VisaInProcessComponent implements OnInit {
-  theList: visa[];
+  theList$: Observable<string[]>;
 
-  constructor(private visaServices: VisaService) {
-    this.theList = [];
-  }
+  constructor(private store: Store<visa[]>) {}
 
   ngOnInit(): void {
-    this.visaServices.getVisaInProgess().subscribe((visaList) => {
-      if (visaList) {
-        this.theList = visaList;
-      }
-    });
+    this.theList$ = this.store.pipe(select(selectInProcessIds));
   }
 }
