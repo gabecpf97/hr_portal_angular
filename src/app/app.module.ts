@@ -31,6 +31,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { FilterPipe } from './pipes/filter.pipe';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { EmployeeEntireProfileComponent } from './components/employee-entire-profile/employee-entire-profile.component';
+import { HiringApplicationComponent } from './components/hiring-application/hiring-application.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { EmployeeEntireProfileComponent } from './components/employee-entire-pro
     HousingManagementComponent,
     FilterPipe,
     EmployeeEntireProfileComponent,
+    HiringApplicationComponent,
   ],
   imports: [
     BrowserModule,
