@@ -18,6 +18,8 @@ export class HiringManagementComponent implements OnInit {
   approvedDataSource = new MatTableDataSource<any>();
 
   displayedColumns: string[] = ['name', 'email', 'link', 'status']
+  pendingColumns: string[] = ['name', 'email', 'action']
+
   
   constructor(private http: HttpClient) { }
 
@@ -45,10 +47,31 @@ export class HiringManagementComponent implements OnInit {
     .subscribe({
       next: (response) => {
         this.pendingDataSource.data = response.filteredApplications;
-        console.log(this.pendingDataSource.data)
       },
       error: (error) => {
         console.error('Error fetching pending applications:', error);
+      }
+    });
+
+    this.http.get<{filteredApplications: any[]}>('http://localhost:3000/application/filter?status=rejected', { headers })
+    .subscribe({
+      next: (response) => {
+        this.rejectedDataSource.data = response.filteredApplications;
+        console.log(this.rejectedDataSource.data)
+      },
+      error: (error) => {
+        console.error('Error fetching rejected applications:', error);
+      }
+    });
+
+    this.http.get<{filteredApplications: any[]}>('http://localhost:3000/application/filter?status=approved', { headers })
+    .subscribe({
+      next: (response) => {
+        this.approvedDataSource.data = response.filteredApplications;
+        console.log(this.approvedDataSource.data)
+      },
+      error: (error) => {
+        console.error('Error fetching approved applications:', error);
       }
     });
   }

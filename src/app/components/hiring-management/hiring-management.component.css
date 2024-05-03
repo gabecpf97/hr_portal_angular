@@ -15,6 +15,11 @@
     text-align: center;
 }
 
+.mat-column-action {
+    width: 20%;
+    text-align: center;
+}
+
 .mat-cell, .mat-header-cell {
     max-width: 500px; 
     overflow: hidden; 
