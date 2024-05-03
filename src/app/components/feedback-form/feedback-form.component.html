@@ -1,0 +1,12 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <label for="status">Approve / Rejected</label>
+  <select formControlName="status">
+    <option value="approved">Approve</option>
+    <option value="rejected">Rejecte</option>
+  </select>
+  <div *ngIf="form.get('status')?.value === 'rejected'">
+    <label>Feedback: </label>
+    <input type="text" formControlName="feedback" />
+  </div>
+  <button type="submit">Submit</button>
+</form>

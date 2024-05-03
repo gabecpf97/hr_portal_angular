@@ -1,1 +1,113 @@
-<p>housing-management works!</p>
+<app-home></app-home>
+<!-- <form [formGroup]="housingForm" (ngSubmit)="onSubmit()">
+  <div formGroupName="address">
+    <input formControlName="buildingAptNum" placeholder="Building/Apt Number">
+    <input formControlName="street" placeholder="Street">
+    <input formControlName="city" placeholder="City">
+    <input formControlName="state" placeholder="State">
+    <input formControlName="zip" placeholder="ZIP Code">
+  </div>
+  <div formGroupName="landlord">
+    <input formControlName="firstName" placeholder="Landlord's First Name">
+    <input formControlName="lastName" placeholder="Landlord's Last Name">
+    <input formControlName="phone" placeholder="Phone">
+    <input formControlName="email" placeholder="Email">
+  </div>
+  <div formGroupName="furniture">
+    <input formControlName="bed" placeholder="Number of Beds">
+    <input formControlName="mattress" placeholder="Number of mattress">
+    <input formControlName="table" placeholder="Number of Tables">
+    <input formControlName="chair" placeholder="Number of Chairs">
+  </div>
+  <button type="submit" [disabled]="!housingForm.valid">Add Housing</button>
+</form> -->
+
+<form [formGroup]="housingForm" (ngSubmit)="onSubmit()" class="housing-form">
+  <div formGroupName="address">
+    <mat-form-field appearance="fill">
+      <mat-label>Building/Apt Number</mat-label>
+      <input matInput formControlName="buildingAptNum">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Street</mat-label>
+      <input matInput formControlName="street">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>City</mat-label>
+      <input matInput formControlName="city">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>State</mat-label>
+      <input matInput formControlName="state">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>ZIP Code</mat-label>
+      <input matInput formControlName="zip">
+    </mat-form-field>
+  </div>
+  <div formGroupName="landlord">
+    <mat-form-field appearance="fill">
+      <mat-label>Landlord's First Name</mat-label>
+      <input matInput formControlName="firstName">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Landlord's Last Name</mat-label>
+      <input matInput formControlName="lastName">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Phone</mat-label>
+      <input matInput formControlName="phone">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+  </div>
+  <div formGroupName="furniture">
+    <mat-form-field appearance="fill">
+      <mat-label>Number of Beds</mat-label>
+      <input matInput formControlName="bed">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Number of Mattresses</mat-label>
+      <input matInput formControlName="mattress">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Number of Tables</mat-label>
+      <input matInput formControlName="table">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Number of Chairs</mat-label>
+      <input matInput formControlName="chair">
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!housingForm.valid">Add Housing</button>
+</form>
+
+<div class="grid-container">
+  <div *ngFor="let house of houses$ | async; trackBy: trackByHouseId">
+    <mat-card class="house-card mat-elevation-z3">
+      <mat-card-header>
+        <mat-card-title>{{ house.address.buildingAptNum }} - {{ house.address.street }}</mat-card-title>
+        <mat-card-subtitle>{{ house.address.city }}, {{ house.address.state }} {{ house.address.zip }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <h3 class="mat-title">Landlord Info:</h3>
+        <p><strong>Name:</strong> {{ house.landlord.firstName }} {{ house.landlord.lastName }}</p>
+        <p><strong>Email:</strong> {{ house.landlord.email }}</p>
+        <p><strong>Phone:</strong> {{ house.landlord.phone }}</p>
+        <h3 class="mat-title">Furniture:</h3>
+        <ul>
+          <li><strong>Beds:</strong> {{ house.furniture.bed }}</li>
+          <li><strong>Tables:</strong> {{ house.furniture.table }}</li>
+          <li><strong>Chairs:</strong> {{ house.furniture.chair }}</li>
+        </ul>
+        <p><strong>Number of Residents:</strong> {{ house.residentIds.length }}</p>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button color="primary" [routerLink]="['/details', house._id]">View Details</button>
+        <button mat-button color="warn" (click)="deleteHousing(house._id)">Delete House</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
