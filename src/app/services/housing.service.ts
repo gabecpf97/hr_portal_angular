@@ -84,5 +84,16 @@ export class HousingService {
         })
       );
   }
+
+  getUserDetails(userId: string): Observable<any> {
+    return this.http.get(
+      `http://localhost:3000/housing/getApplicationInfo/${userId}`,  
+      this.getHttpOptions())
+      .pipe(
+        catchError(error => {
+          throw 'Error in getting user info: ' + error;
+        })
+      );
+    }
   
 }

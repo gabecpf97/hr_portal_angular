@@ -11,9 +11,12 @@
             <p><strong>Number of Mattresses:</strong> {{ house.houseInfo.furniture.mattress }}</p>
         </mat-card-content>
     </mat-card>
-
+    
     <div class="employee-grid">
-        <mat-card *ngFor="let employee of residents" class="employee-card" >
+        <a *ngFor="let employee of residents" 
+            [routerLink]="['/hiring-application', employee.applicationId]"
+            class="employee-card-link">
+            <mat-card class="employee-card">
             <mat-card-header>
                 <mat-card-title>{{ employee.firstName }} {{ employee.lastName }}</mat-card-title>
             </mat-card-header>
@@ -21,41 +24,16 @@
                 <p><strong>Phone:</strong> {{ employee.cellPhone }}</p>
                 <p><strong>Email:</strong> {{ employee.email }}</p>
                 <p *ngIf="employee.car; else noCarInfo">
-                    <strong>Car Info:</strong> {{ employee.car.make }} - {{ employee.car.model }} - {{ employee.car.color }}
+                <strong>Car Info:</strong> {{ employee.car.make }} - {{ employee.car.model }} - {{ employee.car.color }}
                 </p>
                 <ng-template #noCarInfo><p>No car information available.</p></ng-template>
             </mat-card-content>
-        </mat-card>
+            </mat-card>
+        </a>
     </div>
 
 
     <h1>Facility Reports</h1>
-    <!-- <mat-card *ngFor="let report of reports | slice:(currentPage-1) * itemsPerPage : currentPage * itemsPerPage">
-        <mat-card-header>
-            <mat-card-title>{{ report.title }}</mat-card-title>
-            <mat-card-subtitle>Created by: {{report.username}} {{ report.createdBy }} on {{ report.timestamp | date:'shortDate' }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p>Issue: {{ report.description }}</p>
-            <p><strong>Status:</strong> {{ report.status }}</p>
-            <h4>Comments:</h4>
-            <div class="comments-container">
-                <ul>
-                    <li *ngFor="let reportItem of report.comments">
-                        <strong>{{reportItem.username}} {{ reportItem.createdBy }}:</strong>
-                        {{ reportItem.description }}
-                        <br>
-                        <span class="comment-time">{{ reportItem.timestamp | date:'shortTime' }} {{ reportItem.timestamp | date:'shortDate' }}</span>
-                    </li>
-                </ul>
-            </div>
-            <mat-form-field class="comment-input">
-                <mat-label>Add Comment</mat-label>
-                <input matInput [(ngModel)]="newComments[report._id]">
-            </mat-form-field>
-            <button mat-button color="primary" (click)="addComment(report._id)">Add Comment</button>
-        </mat-card-content>
-    </mat-card> -->
     <mat-card *ngFor="let report of reports | slice:(currentPage-1) * itemsPerPage : currentPage * itemsPerPage">
         <mat-card-header>
             <mat-card-title>{{ report.title }}</mat-card-title>
