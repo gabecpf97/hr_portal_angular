@@ -83,3 +83,9 @@
     margin: 0 10px; /* Space around the page indicator */
     font-size: 1.2em; /* Larger text for visibility */
 }
+
+.employee-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit; /* Preserve text color of the card */
+}

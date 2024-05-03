@@ -67,6 +67,7 @@ lastName: string;
 middleName: string;
 cellPhone: string;
 email: string;
+applicationId: string;
 }
 
 export interface Housing {

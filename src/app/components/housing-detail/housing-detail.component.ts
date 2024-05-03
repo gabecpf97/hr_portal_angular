@@ -23,6 +23,7 @@ export class HousingDetailComponent implements OnInit {
   residents: Resident[] = [];
   userInfo: any = {};
   comments: Comment[] = [];
+  applicationid: string = '';
   
   constructor(
     private route: ActivatedRoute,
@@ -31,6 +32,7 @@ export class HousingDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     this.house$ = this.route.paramMap.pipe(
       switchMap(params => {
         const id = params.get('id');
@@ -45,7 +47,7 @@ export class HousingDetailComponent implements OnInit {
               userInfo => {
                 report.username = userInfo.userInfo.username; // Add user info to the report
                 // console.log(userInfo.userInfo.username);
-                console.log('Updated Report with User Info:', report);
+                // console.log('Updated Report with User Info:', report);
               },
               error => {
                 console.error('Error fetching user info:', error);
@@ -55,6 +57,8 @@ export class HousingDetailComponent implements OnInit {
 
           console.log(this.reports);
           this.residents = house.residents.filter((resident:Resident) => resident !== null);
+          this.updateUserCardWithApplicationId(this.residents);
+
           // console.log("here----------------------------",this.residents);
           this.numberOfPages = Math.ceil(house.houseInfo.facilityReportsIds.length / this.itemsPerPage);
         }
@@ -62,6 +66,16 @@ export class HousingDetailComponent implements OnInit {
     );
   }
 
+
+  updateUserCardWithApplicationId(residents: Resident[]): void {
+    residents.forEach(resident => {
+      this.housingService.getUserDetails(resident.userId).subscribe(
+        data => {
+          resident.applicationId = data.applicationId;
+        }
+      )
+    });
+  }
   updateCommentsWithUserInfo(reports: Report[]): void {
     reports.forEach(report => {
       report.comments.forEach(comment => {
@@ -93,57 +107,60 @@ export class HousingDetailComponent implements OnInit {
     return this.userInfo.username;
   }
 
-addComment(reportId: string): void {
-  const commentText = this.newComments[reportId].trim();
-  if (!commentText) {
-    alert('Please enter a comment');
-    return;
+  addComment(reportId: string): void {
+    const commentText = this.newComments[reportId].trim();
+    if (!commentText) {
+      alert('Please enter a comment');
+      return;
+    }
+
+    this.housingService.addComment(reportId, commentText).subscribe({
+      next: (response) => {
+        if (!response || !response.newReport) {
+          console.error('Invalid response or newReport data:', response);
+          alert('Failed to add the comment due to invalid data.');
+          return;
+        }
+
+        console.log('Comment added successfully', response);
+        const reportIndex = this.reports.findIndex(r => r._id === reportId);
+        if (reportIndex !== -1) {
+          // Update local report data
+          this.reports[reportIndex] = response.newReport;
+
+          // Fetch user info for each comment if not provided
+          this.reports[reportIndex].comments.forEach(comment => {
+            if (!comment.username) {
+              this.housingService.getUserInfo(comment.createdBy).subscribe(userInfo => {
+                comment.username = userInfo.userInfo.username;
+                this.changeDetectorRef.markForCheck();
+              });
+            }
+          });
+          this.reports = [...this.reports];
+        }
+        this.newComments[reportId] = '';
+      },
+      error: (error) => {
+        console.error('Failed to add comment', error);
+        alert('Failed to add the comment. Please try again.');
+      }
+    });
   }
 
-  this.housingService.addComment(reportId, commentText).subscribe({
-    next: (response) => {
-      if (!response || !response.newReport) {
-        console.error('Invalid response or newReport data:', response);
-        alert('Failed to add the comment due to invalid data.');
-        return;
+  updateReportStatus(reportId: string, newStatus: string): void {
+    this.housingService.updateReportStatus(reportId, newStatus).subscribe({
+      next: response => {
+        // Handle response, e.g., show a message or update local data
+        console.log('Status updated successfully');
+      },
+      error: error => {
+        console.error('Error updating status:', error);
       }
+    });
+  }
 
-      console.log('Comment added successfully', response);
-      const reportIndex = this.reports.findIndex(r => r._id === reportId);
-      if (reportIndex !== -1) {
-        // Update local report data
-        this.reports[reportIndex] = response.newReport;
 
-        // Fetch user info for each comment if not provided
-        this.reports[reportIndex].comments.forEach(comment => {
-          if (!comment.username) {
-            this.housingService.getUserInfo(comment.createdBy).subscribe(userInfo => {
-              comment.username = userInfo.userInfo.username;
-              this.changeDetectorRef.markForCheck();
-            });
-          }
-        });
-        this.reports = [...this.reports];
-      }
-      this.newComments[reportId] = '';
-    },
-    error: (error) => {
-      console.error('Failed to add comment', error);
-      alert('Failed to add the comment. Please try again.');
-    }
-  });
-}
 
-updateReportStatus(reportId: string, newStatus: string): void {
-  this.housingService.updateReportStatus(reportId, newStatus).subscribe({
-    next: response => {
-      // Handle response, e.g., show a message or update local data
-      console.log('Status updated successfully');
-    },
-    error: error => {
-      console.error('Error updating status:', error);
-    }
-  });
-}
 
 }
