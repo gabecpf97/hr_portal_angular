@@ -51,35 +51,60 @@ export class HousingManagementComponent implements OnInit {
     
     this.houses$ = this.housingService.getAllHousing().pipe();
     this.houses$.subscribe(houses => {
-      console.log(houses)
+      // console.log(houses)
       houses = houses.reverse();
   });
 
     
   }
 
+
   onSubmit(): void {
+    // Check if the form is valid
     if (this.housingForm.valid) {
-      console.log(this.housingForm.value);
       const formValue = {
         ...this.housingForm.value,
-        buildingAptNum: parseInt(this.housingForm.value.address.buildingAptNum, 10),
-        bed: parseInt(this.housingForm.value.furniture.bed, 10),
-        mattress: parseInt(this.housingForm.value.furniture.mattress, 10),
-        table: parseInt(this.housingForm.value.furniture.table, 10),
-        chair: parseInt(this.housingForm.value.furniture.chair, 10),
+        address: {
+          ...this.housingForm.value.address,
+          buildingAptNum: parseInt(this.housingForm.value.address.buildingAptNum, 10)
+        },
+        furniture: {
+          bed: parseInt(this.housingForm.value.furniture.bed, 10),
+          mattress: parseInt(this.housingForm.value.furniture.mattress, 10),
+          table: parseInt(this.housingForm.value.furniture.table, 10),
+          chair: parseInt(this.housingForm.value.furniture.chair, 10),
+        },
         residentIds: [],
         facilityReportsIds: []
-
+      };
+  
+      if (isNaN(formValue.address.buildingAptNum) ||
+          isNaN(formValue.furniture.bed) ||
+          isNaN(formValue.furniture.mattress) ||
+          isNaN(formValue.furniture.table) ||
+          isNaN(formValue.furniture.chair)) {
+        alert("Please enter valid numbers for building/apt number, bed, mattress, table, and chairs.");
+        return;
       }
-      this.loadHouses();
-      this.housingService.addHousing(this.housingForm.value).subscribe({
-        next: (response) => console.log('Housing added successfully', response),
-        error: (error) => console.error('Failed to add housing', error)
+  
+
+      this.housingService.addHousing(formValue).subscribe({
+        next: (response) => {
+          console.log('Housing added successfully', response);
+          this.loadHouses();
+        },
+        error: (error) => {
+          console.error('Failed to add housing', error);
+          alert('Failed to submit form. Please try again.');
+        }
       });
+    } else {
+      alert('Form is not valid, please check your entries.');
     }
+  
     this.houses$ = this.housingService.getAllHousing().pipe();
   }
+  
 
   loadHouses() {
     this.houses$ = this.housingService.getAllHousing().pipe();

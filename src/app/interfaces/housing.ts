@@ -27,6 +27,8 @@ createdBy: string;
 username: string;
 timestamp: number;
 _id: string;
+isEditing: boolean;
+newDescription: string;
 }
 
 export interface Report {

@@ -24,6 +24,9 @@ export class HousingDetailComponent implements OnInit {
   userInfo: any = {};
   comments: Comment[] = [];
   applicationid: string = '';
+  isEditing: boolean = false;
+  newDescription: string = '';
+  localusername: string | null = '';
   
   constructor(
     private route: ActivatedRoute,
@@ -32,7 +35,7 @@ export class HousingDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+    this.localusername = window.localStorage.getItem('username');
     this.house$ = this.route.paramMap.pipe(
       switchMap(params => {
         const id = params.get('id');
@@ -160,7 +163,29 @@ export class HousingDetailComponent implements OnInit {
     });
   }
 
+  enableEdit(reportItem: any): void {
+    reportItem.isEditing = true;
+    reportItem.newDescription = reportItem.description;
+  }
 
+  submitEdit(reportId:any,reportItem: any): void {
+    if (!reportItem.newDescription) {
+      alert('Please enter a comment.');
+      return;
+    }
+    // const update = {
+    //   commentId: reportItem._id,
+    //   newComment: reportItem.newDescription
+    // };
+    // Call a service method to update the comment in the backend
+    this.housingService.updateComment(reportItem.newDescription,reportId, reportItem._id).subscribe({
+      next: () => {
+        reportItem.description = reportItem.newDescription;
+        reportItem.isEditing = false; // Turn off editing mode
+      },
+      error: (error) => console.error('Error updating comment:', error)
+    });
+  }
 
 
 }
