@@ -30,7 +30,7 @@
 
 
     <h1>Facility Reports</h1>
-    <mat-card *ngFor="let report of reports | slice:(currentPage-1) * itemsPerPage : currentPage * itemsPerPage">
+    <!-- <mat-card *ngFor="let report of reports | slice:(currentPage-1) * itemsPerPage : currentPage * itemsPerPage">
         <mat-card-header>
             <mat-card-title>{{ report.title }}</mat-card-title>
             <mat-card-subtitle>Created by: {{report.username}} {{ report.createdBy }} on {{ report.timestamp | date:'shortDate' }}</mat-card-subtitle>
@@ -55,7 +55,45 @@
             </mat-form-field>
             <button mat-button color="primary" (click)="addComment(report._id)">Add Comment</button>
         </mat-card-content>
+    </mat-card> -->
+    <mat-card *ngFor="let report of reports | slice:(currentPage-1) * itemsPerPage : currentPage * itemsPerPage">
+        <mat-card-header>
+            <mat-card-title>{{ report.title }}</mat-card-title>
+            <mat-card-subtitle>Created by: {{report.username}} {{ report.createdBy }} on {{ report.timestamp | date:'shortDate' }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Issue: {{ report.description }}</p>
+            <div>
+                <strong>Status:</strong>
+                <mat-form-field>
+                    <mat-label>Status</mat-label>
+                    <mat-select [(ngModel)]="report.status">
+                        <mat-option value="open">Open</mat-option>
+                        <mat-option value="in progress">In Progress</mat-option>
+                        <mat-option value="closed">Closed</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-button color="primary" (click)="updateReportStatus(report._id, report.status)">Update Status</button>
+            </div>
+            <h4>Comments:</h4>
+            <div class="comments-container">
+                <ul>
+                    <li *ngFor="let reportItem of report.comments">
+                        <strong>{{reportItem.username}} {{ reportItem.createdBy }}:</strong>
+                        {{ reportItem.description }}
+                        <br>
+                        <span class="comment-time">{{ reportItem.timestamp | date:'shortTime' }} {{ reportItem.timestamp | date:'shortDate' }}</span>
+                    </li>
+                </ul>
+            </div>
+            <mat-form-field class="comment-input">
+                <mat-label>Add Comment</mat-label>
+                <input matInput [(ngModel)]="newComments[report._id]">
+            </mat-form-field>
+            <button mat-button color="primary" (click)="addComment(report._id)">Add Comment</button>
+        </mat-card-content>
     </mat-card>
+    
     
 
     <div class="pagination-buttons">

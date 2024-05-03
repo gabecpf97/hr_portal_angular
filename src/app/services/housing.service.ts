@@ -70,5 +70,19 @@ export class HousingService {
         })
       );
   }
+
+  updateReportStatus(reportId: string, newStatus: string): Observable<any> {
+    return this.http.post(
+      `http://localhost:3000/housing/reports/updateStatus`, 
+      {"reportId": reportId,
+        "newStatus": newStatus
+      }, 
+      this.getHttpOptions())
+      .pipe(
+        catchError(error => {
+          throw 'Error in getting user info: ' + error;
+        })
+      );
+  }
   
 }
