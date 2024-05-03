@@ -13,7 +13,7 @@
     </mat-card>
 
     <div class="employee-grid">
-        <mat-card *ngFor="let employee of residents" class="employee-card">
+        <mat-card *ngFor="let employee of residents" class="employee-card" >
             <mat-card-header>
                 <mat-card-title>{{ employee.firstName }} {{ employee.lastName }}</mat-card-title>
             </mat-card-header>
@@ -33,7 +33,7 @@
     <mat-card *ngFor="let report of reports | slice:(currentPage-1) * itemsPerPage : currentPage * itemsPerPage">
         <mat-card-header>
             <mat-card-title>{{ report.title }}</mat-card-title>
-            <mat-card-subtitle>Created by: {{ report.createdBy }} on {{ report.timestamp | date:'shortDate' }}</mat-card-subtitle>
+            <mat-card-subtitle>Created by: {{report.username}} {{ report.createdBy }} on {{ report.timestamp | date:'shortDate' }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
             <p>Issue: {{ report.description }}</p>
@@ -42,7 +42,7 @@
             <div class="comments-container">
                 <ul>
                     <li *ngFor="let reportItem of report.comments">
-                        <strong>{{ reportItem.createdBy }}:</strong>
+                        <strong>{{reportItem.username}} {{ reportItem.createdBy }}:</strong>
                         {{ reportItem.description }}
                         <br>
                         <span class="comment-time">{{ reportItem.timestamp | date:'shortTime' }} {{ reportItem.timestamp | date:'shortDate' }}</span>

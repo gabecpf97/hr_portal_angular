@@ -21,6 +21,8 @@ export class HousingDetailComponent implements OnInit {
   reports: Report[] = [];
   private subscriptions = new Subscription();
   residents: Resident[] = [];
+  userInfo: any = {};
+  comments: Comment[] = [];
   
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +39,20 @@ export class HousingDetailComponent implements OnInit {
       tap(house => {
         if (house) {
           this.reports = house.houseInfo.facilityReportsIds.reverse();
+          this.updateCommentsWithUserInfo(this.reports);
+          this.reports.forEach(report => {
+            this.housingService.getUserInfo(report.createdBy).subscribe(
+              userInfo => {
+                report.username = userInfo.userInfo.username; // Add user info to the report
+                // console.log(userInfo.userInfo.username);
+                console.log('Updated Report with User Info:', report);
+              },
+              error => {
+                console.error('Error fetching user info:', error);
+              }
+            );
+          });
+
           console.log(this.reports);
           this.residents = house.residents.filter((resident:Resident) => resident !== null);
           // console.log("here----------------------------",this.residents);
@@ -46,11 +62,35 @@ export class HousingDetailComponent implements OnInit {
     );
   }
 
+  updateCommentsWithUserInfo(reports: Report[]): void {
+    reports.forEach(report => {
+      report.comments.forEach(comment => {
+        this.housingService.getUserInfo(comment.createdBy).subscribe(
+          userInfo => {
+            comment.username = userInfo.userInfo.username; // Assign user details to the comment
+          },
+          error => console.error('Error fetching user info for comment:', error)
+        );
+      });
+    });
+  }
+
   changePage(page: number): void {
     if (page < 1 || page > this.numberOfPages) {
       return;
     }
     this.currentPage = page;
+  }
+
+  getUserInfo(id: string){
+    this.housingService.getUserInfo(id).subscribe(
+      data => {
+        this.userInfo = data;
+        console.log('User Info:', data);
+      },
+      error => console.error('Error fetching user info:', error)
+    );
+    return this.userInfo.username;
   }
 
 addComment(reportId: string): void {
@@ -71,11 +111,21 @@ addComment(reportId: string): void {
       console.log('Comment added successfully', response);
       const reportIndex = this.reports.findIndex(r => r._id === reportId);
       if (reportIndex !== -1) {
-        this.reports[reportIndex] = response.newReport; // Replace the old report with the updated one
-        this.reports = [...this.reports]; // Reassign the reports array to trigger change detection
-        this.changeDetectorRef.markForCheck(); // Force change detection
+        // Update local report data
+        this.reports[reportIndex] = response.newReport;
+
+        // Fetch user info for each comment if not provided
+        this.reports[reportIndex].comments.forEach(comment => {
+          if (!comment.username) {
+            this.housingService.getUserInfo(comment.createdBy).subscribe(userInfo => {
+              comment.username = userInfo.userInfo.username;
+              this.changeDetectorRef.markForCheck();
+            });
+          }
+        });
+        this.reports = [...this.reports];
       }
-      this.newComments[reportId] = ''; // Clear the input field after adding
+      this.newComments[reportId] = '';
     },
     error: (error) => {
       console.error('Failed to add comment', error);
@@ -83,8 +133,5 @@ addComment(reportId: string): void {
     }
   });
 }
-
-
-
 
 }

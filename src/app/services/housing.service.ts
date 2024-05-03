@@ -59,6 +59,16 @@ export class HousingService {
     return this.http.post(`http://localhost:3000/housing/reports/${reportId}/comments`, { "description":comment }, this.getHttpOptions());
   }
 
-
+  getUserInfo(id: string): Observable<any> {
+    return this.http.post(
+      `http://localhost:3000/housing/reports/getUserInfo`, 
+      {"userIdfront": id}, 
+      this.getHttpOptions())
+      .pipe(
+        catchError(error => {
+          throw 'Error in getting user info: ' + error;
+        })
+      );
+  }
   
 }
