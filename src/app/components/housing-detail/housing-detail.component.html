@@ -1,0 +1,85 @@
+<app-home></app-home>
+<ng-container *ngIf="house$ | async as house; else noHouse">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Facility Information</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p><strong>Number of Beds:</strong> {{ house.houseInfo.furniture.bed }}</p>
+            <p><strong>Number of Tables:</strong> {{ house.houseInfo.furniture.table }}</p>
+            <p><strong>Number of Chairs:</strong> {{ house.houseInfo.furniture.chair }}</p>
+            <p><strong>Number of Mattresses:</strong> {{ house.houseInfo.furniture.mattress }}</p>
+        </mat-card-content>
+    </mat-card>
+
+    <div class="employee-grid">
+        <mat-card *ngFor="let employee of residents" class="employee-card">
+            <mat-card-header>
+                <mat-card-title>{{ employee.firstName }} {{ employee.lastName }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p><strong>Phone:</strong> {{ employee.cellPhone }}</p>
+                <p><strong>Email:</strong> {{ employee.email }}</p>
+                <p *ngIf="employee.car; else noCarInfo">
+                    <strong>Car Info:</strong> {{ employee.car.make }} - {{ employee.car.model }} - {{ employee.car.color }}
+                </p>
+                <ng-template #noCarInfo><p>No car information available.</p></ng-template>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+
+    <h1>Facility Reports</h1>
+    <mat-card *ngFor="let report of reports | slice:(currentPage-1) * itemsPerPage : currentPage * itemsPerPage">
+        <mat-card-header>
+            <mat-card-title>{{ report.title }}</mat-card-title>
+            <mat-card-subtitle>Created by: {{ report.createdBy }} on {{ report.timestamp | date:'shortDate' }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Issue: {{ report.description }}</p>
+            <p><strong>Status:</strong> {{ report.status }}</p>
+            <h4>Comments:</h4>
+            <div class="comments-container">
+                <ul>
+                    <li *ngFor="let reportItem of report.comments">
+                        <strong>{{ reportItem.createdBy }}:</strong>
+                        {{ reportItem.description }}
+                        <br>
+                        <span class="comment-time">{{ reportItem.timestamp | date:'shortTime' }} {{ reportItem.timestamp | date:'shortDate' }}</span>
+                    </li>
+                </ul>
+            </div>
+            <mat-form-field class="comment-input">
+                <mat-label>Add Comment</mat-label>
+                <input matInput [(ngModel)]="newComments[report._id]">
+            </mat-form-field>
+            <button mat-button color="primary" (click)="addComment(report._id)">Add Comment</button>
+        </mat-card-content>
+    </mat-card>
+    
+
+    <div class="pagination-buttons">
+        <button mat-icon-button (click)="changePage(1)" [disabled]="currentPage === 1" aria-label="First page">
+            <mat-icon>first_page</mat-icon>
+        </button>
+        <button mat-icon-button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" aria-label="Previous page">
+            <mat-icon>chevron_left</mat-icon>
+        </button>
+        <span>Page {{ currentPage }} of {{ numberOfPages }}</span>
+        <button mat-icon-button (click)="changePage(currentPage + 1)" [disabled]="currentPage === numberOfPages" aria-label="Next page">
+            <mat-icon>chevron_right</mat-icon>
+        </button>
+        <button mat-icon-button (click)="changePage(numberOfPages)" [disabled]="currentPage === numberOfPages" aria-label="Last page">
+            <mat-icon>last_page</mat-icon>
+        </button>
+    </div>
+    
+</ng-container>
+
+<ng-template #noHouse>
+    <mat-card>
+        <mat-card-content>
+            <p>No house details available.</p>
+        </mat-card-content>
+    </mat-card>
+</ng-template>

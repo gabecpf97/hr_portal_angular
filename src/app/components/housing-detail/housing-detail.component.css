@@ -1,0 +1,85 @@
+.mat-card {
+    margin-bottom: 15px;
+}
+
+.pagination-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.mat-list-item {
+    border-bottom: 1px solid #160606;
+}
+
+.employee-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.employee-card {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .employee-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .employee-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.comments-container {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.comment-time {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.comment-input {
+    width: 100%;
+}
+
+.mat-card {
+    margin-bottom: 20px;
+}
+
+.mat-card:hover {
+    box-shadow: 0 4px 8px rgba(2, 118, 241, 0.627);
+}
+
+.mat-card-header {
+    padding: 10px;
+    background-color: #b1dcff;
+}
+
+.pagination-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination-buttons button {
+    min-width: 40px; /* Ensures buttons have a consistent size */
+    margin: 0 5px; /* Space between buttons */
+}
+
+.pagination-buttons span {
+    margin: 0 10px; /* Space around the page indicator */
+    font-size: 1.2em; /* Larger text for visibility */
+}

@@ -4,6 +4,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/user/user.reducer';
 
@@ -36,6 +37,8 @@ import { VisaAllSearchComponent } from './components/visa-all-search/visa-all-se
 import { VisaItemComponent } from './components/visa-item/visa-item.component';
 import { EmployeeEntireProfileComponent } from './components/employee-entire-profile/employee-entire-profile.component';
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
+import { MatCardModule } from '@angular/material/card';
+import { HousingDetailComponent } from './components/housing-detail/housing-detail.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,7 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
     VisaAllSearchComponent,
     VisaItemComponent,
     FeedbackFormComponent,
+    HousingDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +75,8 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
     MatDividerModule,
     MatListModule,
     ReactiveFormsModule,
+    MatCardModule,
+    
   ],
   providers: [
     {

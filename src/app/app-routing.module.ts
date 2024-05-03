@@ -8,6 +8,7 @@ import { EmployeeProfilesComponent } from './components/employee-profiles/employ
 import { VisaStatusManagementComponent } from './components/visa-status-management/visa-status-management.component';
 import { HiringManagementComponent } from './components/hiring-management/hiring-management.component';
 import { HousingManagementComponent } from './components/housing-management/housing-management.component';
+import { HousingDetailComponent } from './components/housing-detail/housing-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path: 'housing-management',
     component: HousingManagementComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'details/:id',
+    component: HousingDetailComponent,
     canActivate: [AuthGuard],
   },
   { path: '**', component: PageNotFoundComponent },
