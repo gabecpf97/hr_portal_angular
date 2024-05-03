@@ -1,27 +1,4 @@
 <app-home></app-home>
-<!-- <form [formGroup]="housingForm" (ngSubmit)="onSubmit()">
-  <div formGroupName="address">
-    <input formControlName="buildingAptNum" placeholder="Building/Apt Number">
-    <input formControlName="street" placeholder="Street">
-    <input formControlName="city" placeholder="City">
-    <input formControlName="state" placeholder="State">
-    <input formControlName="zip" placeholder="ZIP Code">
-  </div>
-  <div formGroupName="landlord">
-    <input formControlName="firstName" placeholder="Landlord's First Name">
-    <input formControlName="lastName" placeholder="Landlord's Last Name">
-    <input formControlName="phone" placeholder="Phone">
-    <input formControlName="email" placeholder="Email">
-  </div>
-  <div formGroupName="furniture">
-    <input formControlName="bed" placeholder="Number of Beds">
-    <input formControlName="mattress" placeholder="Number of mattress">
-    <input formControlName="table" placeholder="Number of Tables">
-    <input formControlName="chair" placeholder="Number of Chairs">
-  </div>
-  <button type="submit" [disabled]="!housingForm.valid">Add Housing</button>
-</form> -->
-
 <form [formGroup]="housingForm" (ngSubmit)="onSubmit()" class="housing-form">
   <div formGroupName="address">
     <mat-form-field appearance="fill">

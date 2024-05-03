@@ -54,16 +54,6 @@
                 <button mat-button color="primary" (click)="updateReportStatus(report._id, report.status)">Update Status</button>
             </div>
             <h4>Comments:</h4>
-            <!-- <div class="comments-container">
-                <ul>
-                    <li *ngFor="let reportItem of report.comments">
-                        <strong>{{reportItem.username}} {{ reportItem.createdBy }}:</strong>
-                        {{ reportItem.description }}
-                        <br>
-                        <span class="comment-time">{{ reportItem.timestamp | date:'shortTime' }} {{ reportItem.timestamp | date:'shortDate' }}</span>
-                    </li>
-                </ul>
-            </div> -->
             <div class="comments-container">
                 <ul>
                     <li *ngFor="let reportItem of report.comments">

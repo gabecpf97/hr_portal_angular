@@ -154,7 +154,6 @@ export class HousingDetailComponent implements OnInit {
   updateReportStatus(reportId: string, newStatus: string): void {
     this.housingService.updateReportStatus(reportId, newStatus).subscribe({
       next: response => {
-        // Handle response, e.g., show a message or update local data
         console.log('Status updated successfully');
       },
       error: error => {
