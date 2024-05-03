@@ -36,9 +36,11 @@ import { VisaInProcessComponent } from './components/visa-in-process/visa-in-pro
 import { VisaAllSearchComponent } from './components/visa-all-search/visa-all-search.component';
 import { VisaItemComponent } from './components/visa-item/visa-item.component';
 import { EmployeeEntireProfileComponent } from './components/employee-entire-profile/employee-entire-profile.component';
+import { HiringApplicationComponent } from './components/hiring-application/hiring-application.component';
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 import { MatCardModule } from '@angular/material/card';
 import { HousingDetailComponent } from './components/housing-detail/housing-detail.component';
+
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { HousingDetailComponent } from './components/housing-detail/housing-deta
     HousingManagementComponent,
     FilterPipe,
     EmployeeEntireProfileComponent,
+    HiringApplicationComponent,
     VisaInProcessComponent,
     VisaAllSearchComponent,
     VisaItemComponent,
@@ -76,7 +79,7 @@ import { HousingDetailComponent } from './components/housing-detail/housing-deta
     MatListModule,
     ReactiveFormsModule,
     MatCardModule,
-    
+
   ],
   providers: [
     {

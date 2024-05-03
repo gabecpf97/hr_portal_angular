@@ -1,1 +1,119 @@
-<p>hiring-management works!</p>
+<h2>Send Registration Link</h2>
+
+<mat-form-field appearance="fill">
+    <mat-label>Employee Name:</mat-label>
+    <input matInput
+            placeholder="Input name..."
+            [(ngModel)]="registrationName">
+</mat-form-field><br>
+
+<mat-form-field appearance="fill">
+    <mat-label>Employee Email:</mat-label>
+    <input matInput
+            placeholder="Input email..."
+            [(ngModel)]="registrationEmail">
+</mat-form-field><br>
+
+<button mat-raised-button color="primary" (click)="sendLink()">
+    Send Link
+</button>
+<hr>
+
+<h2>Registration Link Records</h2>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="link">
+      <th mat-header-cell *matHeaderCellDef> Link </th>
+      <td mat-cell *matCellDef="let element"> {{ element.link }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element"> {{ element.status }} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <hr>
+
+  <h2>Pending Applications</h2>
+  <table mat-table [dataSource]="pendingDataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{ element.firstName}}  {{ element.lastName}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <a [routerLink]="['/hiring-application', element._id]">View Application</a>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="pendingColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: pendingColumns;"></tr>
+  </table>
+  <hr>
+
+  <h2>Rejected Applications</h2>
+  <table mat-table [dataSource]="rejectedDataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{ element.firstName}}  {{ element.lastName}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <a [routerLink]="['/hiring-application', element._id]">View Application</a>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="pendingColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: pendingColumns;"></tr>
+  </table>
+  <hr>
+
+  <h2>Approved Applications</h2>
+  <table mat-table [dataSource]="approvedDataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{ element.firstName}}  {{ element.lastName}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <a [routerLink]="['/hiring-application', element._id]">View Application</a>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="pendingColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: pendingColumns;"></tr>
+  </table>
+  <hr>
