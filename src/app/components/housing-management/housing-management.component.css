@@ -1,0 +1,48 @@
+.house-card {
+  margin: 15px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.house-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(2, 118, 241, 0.627);
+}
+
+.mat-card-title,
+.mat-card-subtitle {
+  color: #154cb3; /* Dark grey color for better readability */
+}
+
+.mat-card-content ul {
+  padding-left: 20px; /* Proper alignment for the list */
+}
+
+.mat-card-content p, .mat-card-content ul li {
+  line-height: 1.5; /* Improved line spacing for readability */
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+}
+
+mat-card-header {
+  background-color: #f0f0f0; /* Light background for the header for contrast */
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates three columns */
+  gap: 16px; /* Space between cards */
+  padding: 16px; /* Padding around the grid */
+}
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* Two columns on smaller screens */
+  }
+}
+@media (max-width: 480px) {
+  .grid-container {
+    grid-template-columns: 1fr; /* One column on very small screens */
+  }
+}

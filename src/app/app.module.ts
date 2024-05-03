@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/user/user.reducer';
 
@@ -22,6 +23,10 @@ import { EmployeeProfilesComponent } from './components/employee-profiles/employ
 import { VisaStatusManagementComponent } from './components/visa-status-management/visa-status-management.component';
 import { HiringManagementComponent } from './components/hiring-management/hiring-management.component';
 import { HousingManagementComponent } from './components/housing-management/housing-management.component';
+import { MatCardModule } from '@angular/material/card';
+import { HousingDetailComponent } from './components/housing-detail/housing-detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -33,6 +38,7 @@ import { HousingManagementComponent } from './components/housing-management/hous
     VisaStatusManagementComponent,
     HiringManagementComponent,
     HousingManagementComponent,
+    HousingDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +52,9 @@ import { HousingManagementComponent } from './components/housing-management/hous
     HttpClientModule,
     FormsModule,
     MatToolbarModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
