@@ -11,7 +11,7 @@
             <p><strong>Number of Mattresses:</strong> {{ house.houseInfo.furniture.mattress }}</p>
         </mat-card-content>
     </mat-card>
-    
+
     <div class="employee-grid">
         <a *ngFor="let employee of residents" 
             [routerLink]="['/hiring-application', employee.applicationId]"
@@ -57,8 +57,16 @@
             <div class="comments-container">
                 <ul>
                     <li *ngFor="let reportItem of report.comments">
-                        <strong>{{reportItem.username}} {{ reportItem.createdBy }}:</strong>
-                        {{ reportItem.description }}
+                        <strong>{{ reportItem.username }}</strong>: {{ reportItem.description }}
+                        <span *ngIf="reportItem.username === localusername">
+                            <button mat-button (click)="enableEdit(reportItem)">Edit</button>
+                        </span>
+                        <div *ngIf="reportItem.isEditing">
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="reportItem.newDescription">
+                            </mat-form-field>
+                            <button mat-button (click)="submitEdit(report._id,reportItem)">Submit</button>
+                        </div>
                         <br>
                         <span class="comment-time">{{ reportItem.timestamp | date:'shortTime' }} {{ reportItem.timestamp | date:'shortDate' }}</span>
                     </li>

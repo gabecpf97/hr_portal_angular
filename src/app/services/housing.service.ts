@@ -95,5 +95,19 @@ export class HousingService {
         })
       );
     }
-  
+
+  updateComment(newComment: string, reportId: string, commentId: string): Observable<any> {
+    return this.http.post(
+      `http://localhost:3000/housing/comments/updateComment`, 
+      {"newComment": newComment,
+        "reportId": reportId,
+        "commentId": commentId
+      }, 
+      this.getHttpOptions())
+      .pipe(
+        catchError(error => {
+          throw 'Error in getting user info: ' + error;
+        })
+      );
+    }
 }
