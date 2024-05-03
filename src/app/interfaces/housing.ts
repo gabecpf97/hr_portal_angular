@@ -24,6 +24,7 @@ chair: number;
 export interface Comment {
 description: string;
 createdBy: string;
+username: string;
 timestamp: number;
 _id: string;
 }
@@ -34,6 +35,7 @@ housingId: string;
 title: string;
 description: string;
 createdBy: string;
+username: string;
 timestamp: number;
 status: string;
 comments: Comment[];
