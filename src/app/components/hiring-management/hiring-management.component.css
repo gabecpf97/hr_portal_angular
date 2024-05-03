@@ -1,0 +1,30 @@
+.mat-column-name {
+    width: 20%;
+}
+
+.mat-column-email {
+    width: 25%;
+}
+
+.mat-column-link {
+    width: 40%;
+}
+
+.mat-column-status {
+    width: 20%;
+    text-align: center;
+}
+
+.mat-column-action {
+    width: 20%;
+    text-align: center;
+}
+
+.mat-cell, .mat-header-cell {
+    max-width: 500px; 
+    overflow: hidden; 
+    text-overflow: scroll; 
+    white-space: normal; 
+    word-wrap: break-word;
+    
+  }

@@ -1,0 +1,122 @@
+<h2>Application {{ applicationId }}</h2>
+
+<div class="header">
+    <h2>{{ applicationData.lastName }}, {{ applicationData.firstName }}</h2>
+  </div>
+  <mat-list class="profile-container">
+    <mat-list-item>Picture: </mat-list-item>
+    <img
+      class="document-image"
+      [src]="applicationData.picture"
+      alt="Picture"
+      width="200"
+      height="200"
+    />
+    <mat-list-item>Status: {{applicationData.status }}</mat-list-item>
+    <mat-list-item>MiddleName: {{ applicationData.middleName || "N/A" }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Email: {{ applicationData.email }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>CellPhone: {{ applicationData.cellPhone }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>WorkPhone: {{ applicationData.workPhone || "N/A" }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>SSN: {{ applicationData.SSN }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>DOB: {{ applicationData.DOB }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Gender: {{ applicationData.gender }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Citizenshimat-list-item: {{ applicationData.citizenship }}</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Address:</mat-list-item>
+    <div style="margin-left: 20px">
+      <mat-list-item
+        >BuildingAmat-list-itemtNum:
+        {{ applicationData.address.buildingAptNum }}</mat-list-item
+      >
+      <mat-list-item>Street: {{ applicationData.address.street }}</mat-list-item>
+      <mat-list-item>City: {{ applicationData.address.city }}</mat-list-item>
+      <mat-list-item>State: {{ applicationData.address.state }}</mat-list-item>
+      <mat-list-item>Zimat-list-item: {{ applicationData.address.zip }}</mat-list-item>
+    </div>
+    <mat-divider></mat-divider>
+  
+    <mat-list-item>Car:</mat-list-item>
+    <div style="margin-left: 20px">
+      <mat-list-item>Make: {{ applicationData.car.make }}</mat-list-item>
+      <mat-list-item>Model: {{ applicationData.car.model }}</mat-list-item>
+      <mat-list-item>Color: {{ applicationData.car.color }}</mat-list-item>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-list-item>Work Authorization:</mat-list-item>
+    <div style="margin-left: 20px">
+      <mat-list-item
+        >Tymat-list-iteme: {{ applicationData.workAuthorization.type }}</mat-list-item
+      >
+      <mat-list-item>document: </mat-list-item>
+      <img
+        class="document-image"
+        [src]="applicationData.workAuthorization.document"
+        alt="Work Authorization Document"
+        width="200"
+        height="200"
+      />
+      <mat-list-item
+        >Start Date: {{ applicationData.workAuthorization.startDate }}</mat-list-item
+      >
+      <mat-list-item
+        >End Date: {{ applicationData.workAuthorization.endDate }}</mat-list-item
+      >
+    </div>
+    <mat-divider></mat-divider>
+    <mat-list-item>Driver License:</mat-list-item>
+    <div style="margin-left: 20px">
+      <mat-list-item>Number: {{ applicationData.driverLicense.number }}</mat-list-item>
+      <mat-list-item
+        >Exmat-list-itemiration Date:
+        {{ applicationData.driverLicense.expirationDate }}</mat-list-item
+      >
+      <mat-list-item>Document: </mat-list-item>
+      <img
+        class="document-image"
+        [src]="applicationData.driverLicense.document"
+        alt="Driver License Document"
+        width="200"
+        height="200"
+      />
+    </div>
+  
+    <mat-list-item>Reference:</mat-list-item>
+    <div style="margin-left: 20px">
+      <mat-list-item
+        >Name: {{ applicationData.reference.lastName }},
+        {{ applicationData.reference.firstName }}</mat-list-item
+      >
+      <mat-list-item>Phone: {{ applicationData.reference.phone }}</mat-list-item>
+      <mat-list-item>Email: {{ applicationData.reference.email }} </mat-list-item>
+      <mat-list-item
+        >Relationship: {{ applicationData.reference.relationship }}
+      </mat-list-item>
+    </div>
+    <mat-list-item>Previous Feedback: {{ applicationData.feedback || "N/A" }} </mat-list-item>
+  </mat-list>
+  
+
+  <hr>
+
+<div *ngIf="applicationStatus === 'pending'">
+    <mat-form-field appearance="fill">
+    <mat-label>Provide Feedback:</mat-label>
+    <input matInput
+            placeholder="Input feedback..."
+            [(ngModel)]="feedback">
+    </mat-form-field><br>
+
+    <button mat-raised-button color="primary" (click)="processApplication('approved')">
+        Approve
+    </button>
+    <button mat-raised-button color="primary" (click)="processApplication('rejected')">
+        Reject
+    </button>
+</div>
