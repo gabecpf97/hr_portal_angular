@@ -40,6 +40,7 @@ import { HiringApplicationComponent } from './components/hiring-application/hiri
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component';
 import { MatCardModule } from '@angular/material/card';
 import { HousingDetailComponent } from './components/housing-detail/housing-detail.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { HousingDetailComponent } from './components/housing-detail/housing-deta
     MatListModule,
     ReactiveFormsModule,
     MatCardModule,
+    MatSelectModule,
 
   ],
   providers: [
