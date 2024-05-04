@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit {
         }
       },
       error: (error) => {
-        alert(error.error.message);
-        // console.error('Login failed', error.error.message);
+        alert('Server is down. Please try again later.');
+        console.error('Login failed', error.error.message);
       },
     });
   }
