@@ -1,4 +1,5 @@
 <div class="login-container">
+  <h1>Login to your account</h1>
   <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
     <div>
       <mat-form-field>
@@ -22,7 +23,7 @@
     <button
       type="submit"
       [disabled]="!loginForm.valid"
-      mat-button
+      mat-flat-button
       color="primary"
     >
       Login
