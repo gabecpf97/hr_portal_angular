@@ -9,6 +9,7 @@
       feedback: {{ visa.OPTReceipt.feedback }}
     </p>
     <app-feedback-form
+      [id]="visa._id"
       *ngIf="visa.OPTReceipt.status === 'pending'"
     ></app-feedback-form>
     <button
@@ -30,6 +31,7 @@
       feedback: {{ visa.OPTEAD.feedback }}
     </p>
     <app-feedback-form
+      [id]="visa._id"
       *ngIf="visa.OPTEAD.status === 'pending'"
     ></app-feedback-form>
     <button
@@ -50,6 +52,7 @@
       feedback: {{ visa.I983.feedback }}
     </p>
     <app-feedback-form
+      [id]="visa._id"
       *ngIf="visa.I983.status === 'pending'"
     ></app-feedback-form>
     <button
@@ -70,6 +73,7 @@
       feedback: {{ visa.I20.feedback }}
     </p>
     <app-feedback-form
+      [id]="visa._id"
       *ngIf="visa.I20.status === 'pending'"
     ></app-feedback-form>
   </div>
