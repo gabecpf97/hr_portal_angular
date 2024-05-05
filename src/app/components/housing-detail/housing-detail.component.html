@@ -1,4 +1,4 @@
-<app-home></app-home>
+
 <ng-container *ngIf="house$ | async as house; else noHouse">
     <mat-card>
         <mat-card-header>
@@ -12,9 +12,10 @@
         </mat-card-content>
     </mat-card>
 
+    <h1>Residents Info</h1>
     <div class="employee-grid">
         <a *ngFor="let employee of residents" 
-            [routerLink]="['/hiring-application', employee.applicationId]"
+            [routerLink]="['/hiring-application', employee._id]"
             class="employee-card-link">
             <mat-card class="employee-card">
             <mat-card-header>
@@ -37,7 +38,7 @@
     <mat-card *ngFor="let report of reports | slice:(currentPage-1) * itemsPerPage : currentPage * itemsPerPage">
         <mat-card-header>
             <mat-card-title>{{ report.title }}</mat-card-title>
-            <mat-card-subtitle>Created by: {{report.username}} {{ report.createdBy }} on {{ report.timestamp | date:'shortDate' }}</mat-card-subtitle>
+            <mat-card-subtitle>Created by: {{ report.createdBy.username }} on {{ report.timestamp | date:'shortDate' }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
             <p>Issue: {{ report.description }}</p>
@@ -62,9 +63,10 @@
             <div class="comments-container">
                 <ul>
                     <li *ngFor="let reportItem of report.comments">
-                        <strong>{{ reportItem.username }}</strong>: {{ reportItem.description }}
-                        <span *ngIf="reportItem.username === localusername">
-                            <button mat-button (click)="enableEdit(reportItem)">Edit</button>
+                        <strong>{{ reportItem.createdBy.username }}</strong>: {{ reportItem.description }}
+                        <span *ngIf="reportItem.createdBy.username === localusername">
+                            <button mat-button (click)="enableEdit(reportItem)"
+                            [disabled]="report.status === 'closed'">Edit</button>
                         </span>
                         <div *ngIf="reportItem.isEditing">
                             <mat-form-field>
@@ -81,7 +83,9 @@
                 <mat-label>Add Comment</mat-label>
                 <input matInput [(ngModel)]="newComments[report._id]">
             </mat-form-field>
-            <button mat-button color="primary" (click)="addComment(report._id)">Add Comment</button>
+            <button mat-button color="primary" 
+            (click)="addComment(report._id)"
+            [disabled]="report.status === 'closed'">Add Comment</button>
         </mat-card-content>
     </mat-card>
     

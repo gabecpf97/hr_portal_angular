@@ -43,7 +43,7 @@ export class HousingService {
 
 
   getHouseById(id: string): Observable<any> {
-    return this.http.get<{ house: any }>(`http://localhost:3000/housing/${id}`, this.getHttpOptions());
+    return this.http.get<{ house: any }>(`http://localhost:3000/housing/hr/${id}`, this.getHttpOptions());
   }
 
   addHousing(housingData: any): Observable<any>{
@@ -56,7 +56,7 @@ export class HousingService {
 
   addComment(reportId: string, comment: string): Observable<any> {
     console.log('comment in service', comment)
-    return this.http.post(`http://localhost:3000/housing/reports/${reportId}/comments`, { "description":comment }, this.getHttpOptions());
+    return this.http.post(`http://localhost:3000/housing/reports/hr/${reportId}/comments`, { "description":comment }, this.getHttpOptions());
   }
 
   getUserInfo(id: string): Observable<any> {

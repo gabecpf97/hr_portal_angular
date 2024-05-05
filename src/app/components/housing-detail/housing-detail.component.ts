@@ -20,7 +20,7 @@ export class HousingDetailComponent implements OnInit {
   public newComments: {[reportId: string]: string} = {};
   reports: Report[] = [];
   private subscriptions = new Subscription();
-  residents: Resident[] = [];
+  residents: any = {};
   userInfo: any = {};
   comments: Comment[] = [];
   applicationid: string = '';
@@ -44,25 +44,27 @@ export class HousingDetailComponent implements OnInit {
       tap(house => {
         if (house) {
           this.reports = house.houseInfo.facilityReportsIds.reverse();
-          this.updateCommentsWithUserInfo(this.reports);
-          this.reports.forEach(report => {
-            this.housingService.getUserInfo(report.createdBy).subscribe(
-              userInfo => {
-                report.username = userInfo.userInfo.username; // Add user info to the report
-                // console.log(userInfo.userInfo.username);
-                // console.log('Updated Report with User Info:', report);
-              },
-              error => {
-                console.error('Error fetching user info:', error);
-              }
-            );
-          });
+          console.log(house)
+          // this.updateCommentsWithUserInfo(this.reports);
+          //   this.housingService.getUserInfo(report.createdBy).subscribe(
+          //     userInfo => {
+          //       report.username = userInfo.userInfo.username; // Add user info to the report
+          //       // console.log(userInfo.userInfo.username);
+          //       // console.log('Updated Report with User Info:', report);
+          //     },
+          //     error => {
+          //       console.error('Error fetching user info:', error);
+          //     }
+          //   );
+          // });
 
-          console.log(this.reports);
-          this.residents = house.residents.filter((resident:Resident) => resident !== null);
-          this.updateUserCardWithApplicationId(this.residents);
+          // console.log(this.reports);
+          // this.residents = house.residents.filter((resident:Resident) => resident !== null);
+          this.residents = Object.values(house.residents);
+          console.log(this.residents)
+          // this.updateUserCardWithApplicationId(this.residents);
 
-          console.log("here----------------------------",this.residents);
+          // console.log("here----------------------------",this.residents);
           this.numberOfPages = Math.ceil(house.houseInfo.facilityReportsIds.length / this.itemsPerPage);
         }
       })
@@ -70,27 +72,27 @@ export class HousingDetailComponent implements OnInit {
   }
 
 
-  updateUserCardWithApplicationId(residents: Resident[]): void {
-    residents.forEach(resident => {
-      this.housingService.getUserDetails(resident.userId).subscribe(
-        data => {
-          resident.applicationId = data.applicationId;
-        }
-      )
-    });
-  }
-  updateCommentsWithUserInfo(reports: Report[]): void {
-    reports.forEach(report => {
-      report.comments.forEach(comment => {
-        this.housingService.getUserInfo(comment.createdBy).subscribe(
-          userInfo => {
-            comment.username = userInfo.userInfo.username; // Assign user details to the comment
-          },
-          error => console.error('Error fetching user info for comment:', error)
-        );
-      });
-    });
-  }
+  // updateUserCardWithApplicationId(residents: Resident[]): void {
+  //   residents.forEach(resident => {
+  //     this.housingService.getUserDetails(resident.userId).subscribe(
+  //       data => {
+  //         resident.applicationId = data.applicationId;
+  //       }
+  //     )
+  //   });
+  // }
+  // updateCommentsWithUserInfo(reports: Report[]): void {
+  //   reports.forEach(report => {
+  //     report.comments.forEach(comment => {
+  //       this.housingService.getUserInfo(comment.createdBy).subscribe(
+  //         userInfo => {
+  //           comment.username = userInfo.userInfo.username; // Assign user details to the comment
+  //         },
+  //         error => console.error('Error fetching user info for comment:', error)
+  //       );
+  //     });
+  //   });
+  // }
 
   changePage(page: number): void {
     if (page < 1 || page > this.numberOfPages) {
@@ -130,16 +132,7 @@ export class HousingDetailComponent implements OnInit {
         if (reportIndex !== -1) {
           // Update local report data
           this.reports[reportIndex] = response.newReport;
-
-          // Fetch user info for each comment if not provided
-          this.reports[reportIndex].comments.forEach(comment => {
-            if (!comment.username) {
-              this.housingService.getUserInfo(comment.createdBy).subscribe(userInfo => {
-                comment.username = userInfo.userInfo.username;
-                this.changeDetectorRef.markForCheck();
-              });
-            }
-          });
+          this.changeDetectorRef.markForCheck();
           this.reports = [...this.reports];
         }
         this.newComments[reportId] = '';
