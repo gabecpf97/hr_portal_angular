@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Subscription, catchError, of } from 'rxjs';
 import { visa } from 'src/app/interfaces/visa';
 import { visaActions } from 'src/app/store/visa/visa.actions';

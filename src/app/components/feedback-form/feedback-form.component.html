@@ -1,12 +1,14 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <label for="status">Approve / Rejected</label>
-  <select formControlName="status">
-    <option value="approved">Approve</option>
-    <option value="rejected">Rejecte</option>
-  </select>
-  <div *ngIf="form.get('status')?.value === 'rejected'">
-    <label>Feedback: </label>
-    <input type="text" formControlName="feedback" />
-  </div>
-  <button type="submit">Submit</button>
+<form class="feedback_form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label for="status">Approve / Rejected</mat-label>
+    <mat-select formControlName="status">
+      <mat-option value="approved">Approve</mat-option>
+      <mat-option value="rejected">Reject</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="form.get('status')?.value === 'rejected'">
+    <mat-label>Feedback: </mat-label>
+    <input matInput type="text" formControlName="feedback" />
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">Submit</button>
 </form>

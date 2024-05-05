@@ -4,7 +4,7 @@
   <div *ngIf="visa.OPTReceipt.status !== 'unuploaded'">
     <p>OPTReceipt:</p>
     <p>status: {{ visa.OPTReceipt.status }}</p>
-    <p>document: {{ visa.OPTReceipt.document }}</p>
+    <p>document: <img [src]="visa.OPTReceipt.document" /></p>
     <p *ngIf="visa.OPTReceipt.status === 'rejected'">
       feedback: {{ visa.OPTReceipt.feedback }}
     </p>
@@ -15,6 +15,8 @@
     ></app-feedback-form>
     <button
       (click)="handleSendNoti()"
+      mat-raised-button
+      color="primary"
       *ngIf="
         visa.OPTEAD.status === 'unuploaded' &&
         visa.OPTReceipt.status === 'approved'
@@ -27,7 +29,7 @@
   <div *ngIf="visa.OPTEAD.status !== 'unuploaded'">
     <p>OPTEAD:</p>
     <p>status: {{ visa.OPTEAD.status }}</p>
-    <p>document: {{ visa.OPTEAD.document }}</p>
+    <p>document: <img [src]="visa.OPTEAD.document" /></p>
     <p *ngIf="visa.OPTEAD.status === 'rejected'">
       feedback: {{ visa.OPTEAD.feedback }}
     </p>
@@ -38,6 +40,8 @@
     ></app-feedback-form>
     <button
       (click)="handleSendNoti()"
+      mat-raised-button
+      color="primary"
       *ngIf="
         visa.I983.status === 'unuploaded' && visa.OPTEAD.status === 'approved'
       "
@@ -49,7 +53,7 @@
   <div *ngIf="visa.I983.status !== 'unuploaded'">
     <p>I983:</p>
     <p>status: {{ visa.I983.status }}</p>
-    <p>document: {{ visa.I983.document }}</p>
+    <p>document: <img [src]="visa.I983.document" /></p>
     <p *ngIf="visa.I983.status === 'rejected'">
       feedback: {{ visa.I983.feedback }}
     </p>
@@ -60,6 +64,8 @@
     ></app-feedback-form>
     <button
       (click)="handleSendNoti()"
+      mat-raised-button
+      color="primary"
       *ngIf="
         visa.I20.status === 'unuploaded' && visa.I983.status === 'approved'
       "
@@ -71,7 +77,7 @@
   <div *ngIf="visa.I20.status !== 'unuploaded'">
     <p>I20:</p>
     <p>status: {{ visa.I20.status }}</p>
-    <p>document: {{ visa.I20.document }}</p>
+    <p>document: <img [src]="visa.I20.document" /></p>
     <p *ngIf="visa.I20.status === 'rejected'">
       feedback: {{ visa.I20.feedback }}
     </p>

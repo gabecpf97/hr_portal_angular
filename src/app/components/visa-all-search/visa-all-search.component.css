@@ -1,0 +1,10 @@
+.visa_div {
+  background-color: #cdd2eb;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+form mat-form-field {
+  margin-right: 10px;
+}

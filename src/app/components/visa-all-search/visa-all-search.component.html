@@ -1,14 +1,18 @@
-<div class="visa-all-search">
-  <h3>All Visa Request</h3>
+<mat-card class="visa-all-search">
+  <mat-card-header>
+    <mat-card-title>All Visa Request</mat-card-title>
+  </mat-card-header>
   <form [formGroup]="form" (ngSubmit)="handleSearch()">
-    <label>Search: </label>
-    <input type="text" formControlName="query" />
-    <button type="submit">Search</button>
+    <mat-form-field>
+      <mat-label>Search: </mat-label>
+      <input matInput type="text" formControlName="query" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Search</button>
   </form>
-  <div class="display-visa-search">
+  <mat-card-content class="visa_div">
     <app-visa-item
       *ngFor="let visa of visaList$ | async"
       [visaId]="visa"
     ></app-visa-item>
-  </div>
-</div>
+  </mat-card-content>
+</mat-card>
