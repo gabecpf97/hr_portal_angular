@@ -42,16 +42,21 @@
         <mat-card-content>
             <p>Issue: {{ report.description }}</p>
             <div>
-                <strong>Status:</strong>
-                <mat-form-field>
+                <strong>Status: {{report.status}}</strong>
+                <mat-chip-list>
+                    <mat-chip [ngStyle]="getStatusStyle(report.status)">
+                        <strong>{{ report.status }}</strong>
+                    </mat-chip>
+                </mat-chip-list>
+                <!-- <mat-form-field>
                     <mat-label>Status</mat-label>
                     <mat-select [(ngModel)]="report.status">
                         <mat-option value="open">Open</mat-option>
                         <mat-option value="in progress">In Progress</mat-option>
                         <mat-option value="closed">Closed</mat-option>
                     </mat-select>
-                </mat-form-field>
-                <button mat-button color="primary" (click)="updateReportStatus(report._id, report.status)">Update Status</button>
+                </mat-form-field> -->
+                <!-- <button mat-button color="primary" (click)="updateReportStatus(report._id, report.status)">Update Status</button> -->
             </div>
             <h4>Comments:</h4>
             <div class="comments-container">

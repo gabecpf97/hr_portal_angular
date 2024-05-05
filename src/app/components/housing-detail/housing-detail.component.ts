@@ -187,4 +187,17 @@ export class HousingDetailComponent implements OnInit {
   }
 
 
+  getStatusStyle(status: string) {
+    switch (status) {
+      case 'open':
+        return { backgroundColor: '#f44336', color: '#fff' }; // Red
+      case 'in progress':
+        return { backgroundColor: '#ffeb3b', color: '#000' }; // Yellow
+      case 'closed':
+        return { backgroundColor: '#4caf50', color: '#fff' }; // Green
+      default:
+        return { backgroundColor: '#9e9e9e', color: '#fff' }; // Gray
+    }
+  }
+
 }
