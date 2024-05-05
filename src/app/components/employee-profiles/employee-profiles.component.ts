@@ -43,6 +43,12 @@ export class EmployeeProfilesComponent implements OnInit {
 
   onSearchInputChange(): void {
     const searchTerm = this.searchInput.toLowerCase().trim();
+    this.dataSource.filterPredicate = (data: Employee, filter: string) => {
+      const fullName = `${data.firstName} ${data.lastName} ${
+        data.preferredName ? data.preferredName : ''
+      }`.toLowerCase();
+      return fullName.includes(filter);
+    };
     this.dataSource.filter = searchTerm;
     this.totalEmployees = this.dataSource.filteredData.length;
   }

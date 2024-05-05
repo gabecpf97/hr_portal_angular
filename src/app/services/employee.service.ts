@@ -30,6 +30,7 @@ export class EmployeeService {
               firstName: application.firstName,
               lastName: application.lastName,
               middleName: application.middleName,
+              preferredName: application.preferredName,
               SSN: application.SSN,
               DOB: application.DOB,
               gender: application.gender,
