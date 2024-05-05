@@ -92,6 +92,7 @@ export class HousingManagementComponent implements OnInit {
         next: (response) => {
           console.log('Housing added successfully', response);
           this.loadHouses();
+          this.housingForm.reset();
         },
         error: (error) => {
           console.error('Failed to add housing', error);

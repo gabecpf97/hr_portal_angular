@@ -62,7 +62,7 @@ export class HousingDetailComponent implements OnInit {
           this.residents = house.residents.filter((resident:Resident) => resident !== null);
           this.updateUserCardWithApplicationId(this.residents);
 
-          // console.log("here----------------------------",this.residents);
+          console.log("here----------------------------",this.residents);
           this.numberOfPages = Math.ceil(house.houseInfo.facilityReportsIds.length / this.itemsPerPage);
         }
       })
