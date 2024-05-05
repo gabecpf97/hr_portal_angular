@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
 import { visa } from 'src/app/interfaces/visa';
 import { VisaService } from 'src/app/services/visa.service';
 import { visaActions } from 'src/app/store/visa/visa.actions';
+import { selectByName, selectVisaIds } from 'src/app/store/visa/visa.selector';
 
 @Component({
   selector: 'app-visa-all-search',
@@ -11,7 +13,7 @@ import { visaActions } from 'src/app/store/visa/visa.actions';
   styleUrls: ['./visa-all-search.component.css'],
 })
 export class VisaAllSearchComponent implements OnInit {
-  visaList: visa[];
+  visaList$: Observable<string[]>;
   form: FormGroup;
 
   constructor(
@@ -19,26 +21,21 @@ export class VisaAllSearchComponent implements OnInit {
     private fb: FormBuilder,
     private store: Store<any>
   ) {
-    this.visaList = [];
+    this.visaList$ = this.store.pipe(select(selectVisaIds));
     this.form = this.fb.group({
       query: ['', Validators.required],
     });
   }
 
   handleSearch(): void {
-    this.visaService
-      .getVisaAll(this.form.get('query')?.value)
-      .subscribe((theList) => {
-        if (theList) {
-          this.visaList = theList;
-        }
-      });
+    this.visaList$ = this.store.pipe(
+      select(selectByName(this.form.get('query')?.value))
+    );
   }
 
   ngOnInit(): void {
     this.visaService.getVisaAll('').subscribe((theList) => {
       if (theList) {
-        this.visaList = theList;
         this.store.dispatch(visaActions.addall({ visaList: theList }));
       }
     });

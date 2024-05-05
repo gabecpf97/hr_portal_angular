@@ -11,12 +11,13 @@ export const visaReducer = createReducer(
   }),
 
   on(visaActions.update, (state, { newVisa }) => {
-    return state.map((visa) => {
+    const newList = state.map((visa) => {
       if (visa._id === newVisa._id) {
         return newVisa;
       } else {
         return visa;
       }
     });
+    return [...newList];
   })
 );
