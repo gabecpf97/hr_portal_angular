@@ -23,7 +23,7 @@ chair: number;
 
 export interface Comment {
 description: string;
-createdBy: string;
+createdBy: ReportUser;
 username: string;
 timestamp: number;
 _id: string;
@@ -36,7 +36,7 @@ _id: string;
 housingId: string;
 title: string;
 description: string;
-createdBy: string;
+createdBy: ReportUser;
 username: string;
 timestamp: number;
 status: string;
@@ -75,4 +75,15 @@ applicationId: string;
 export interface Housing {
 houseInfo: HouseInfo;
 residents: (Resident | null)[];
+}
+
+export interface ReportUser {
+    _id: string;
+    username: string;
+    password: string;
+    email: string;
+    status: string;
+    isHR: boolean;
+    housingId: string;
+    applicationsId: string;
 }
