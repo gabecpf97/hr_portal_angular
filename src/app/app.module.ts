@@ -42,6 +42,10 @@ import { MatCardModule } from '@angular/material/card';
 import { HousingDetailComponent } from './components/housing-detail/housing-detail.component';
 import { MatSelectModule } from '@angular/material/select';
 
+import { MatChipsModule } from '@angular/material/chips';
+import { MatGridListModule } from '@angular/material/grid-list';
+
+
 
 @NgModule({
   declarations: [
@@ -81,6 +85,8 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     MatCardModule,
     MatSelectModule,
+    MatChipsModule,
+    MatGridListModule,
 
   ],
   providers: [
