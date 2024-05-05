@@ -2,6 +2,7 @@ export interface visa {
   appId: {
     firstName: string;
     lastName: string;
+    middleName?: string;
   };
   step: string;
   OPTReceipt: {

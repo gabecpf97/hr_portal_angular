@@ -6,6 +6,9 @@
     <button type="submit">Search</button>
   </form>
   <div class="display-visa-search">
-    <app-visa-item *ngFor="let visa of visaList" [visa]="visa"></app-visa-item>
+    <app-visa-item
+      *ngFor="let visa of visaList$ | async"
+      [visaId]="visa"
+    ></app-visa-item>
   </div>
 </div>

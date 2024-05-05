@@ -13,6 +13,7 @@ import { visaActions } from 'src/app/store/visa/visa.actions';
 })
 export class FeedbackFormComponent implements OnInit {
   @Input() id: string;
+  @Input() handleSubmit: (value: any) => void;
   form: FormGroup;
   private url = 'http://localhost:3000/visa';
 
@@ -27,24 +28,9 @@ export class FeedbackFormComponent implements OnInit {
     });
   }
 
-  handleSubmit = (): void => {
-    console.log('Form submitted:', this.form.value);
-    this.http
-      .put<any>(`${this.url}/${this.id}/action`, this.form.value)
-      .pipe(
-        catchError((err) => {
-          console.log('error in updating visa', this.id, err);
-          return '';
-        })
-      )
-      .subscribe((response: { visa: visa }) => {
-        if (response && response.visa) {
-          this.store.dispatch(visaActions.update({ newVisa: response.visa }));
-        }
-      });
+  onSubmit = (): void => {
+    this.handleSubmit(this.form.value);
   };
 
-  ngOnInit(): void {
-    console.log(this.id);
-  }
+  ngOnInit(): void {}
 }
