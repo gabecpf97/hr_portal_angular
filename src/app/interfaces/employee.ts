@@ -1,10 +1,10 @@
-// src/app/models/employee.model.ts
 export interface Employee {
   id: string;
   firstName: string;
   lastName: string;
   middleName?: string;
-  SSN: string; // Consider handling sensitive information carefully
+  preferredName?: string;
+  SSN: string;
   DOB: string;
   gender: string;
   citizenship: string;
