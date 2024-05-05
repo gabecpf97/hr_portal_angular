@@ -2,3 +2,9 @@ img {
   max-width: 15vw;
   height: auto;
 }
+
+a {
+  background-color: rgb(63, 81, 181);
+  color: rgb(255, 255, 255);
+  margin-right: 10px;
+}
