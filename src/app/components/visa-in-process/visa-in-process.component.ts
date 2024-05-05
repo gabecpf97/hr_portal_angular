@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { visa } from 'src/app/interfaces/visa';
 import {
   selectInProcessIds,
@@ -14,10 +14,15 @@ import {
 })
 export class VisaInProcessComponent implements OnInit {
   theList$: Observable<string[]>;
+  private visaListSubscription: Subscription;
+  visaList: string[] = []; // To store the visa list
 
   constructor(private store: Store<visa[]>) {}
 
   ngOnInit(): void {
     this.theList$ = this.store.pipe(select(selectInProcessIds));
+    this.visaListSubscription = this.theList$.subscribe((visaList) => {
+      this.visaList = [...visaList];
+    });
   }
 }

@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Subscription, catchError, of } from 'rxjs';
 import { visa } from 'src/app/interfaces/visa';
+import { visaActions } from 'src/app/store/visa/visa.actions';
 import { selectVisaById } from 'src/app/store/visa/visa.selector';
 
 @Component({
@@ -16,6 +17,7 @@ export class VisaItemComponent implements OnInit {
   currentVisa: Subscription | undefined;
   notiSent: boolean = false;
   constructor(private http: HttpClient, private store: Store<visa[]>) {}
+  private url = 'http://localhost:3000/visa';
 
   handleSendNoti(): void {
     this.http
@@ -36,6 +38,23 @@ export class VisaItemComponent implements OnInit {
         }
       });
   }
+
+  handleSubmit = (value: any): void => {
+    this.http
+      .put<any>(`${this.url}/${this.visaId}/action`, value)
+      .pipe(
+        catchError((err) => {
+          console.log('error in updating visa', this.visaId, err);
+          return '';
+        })
+      )
+      .subscribe((response: { visa: visa }) => {
+        if (response && response.visa) {
+          this.store.dispatch(visaActions.update({ newVisa: response.visa }));
+          this.visa = { ...response.visa };
+        }
+      });
+  };
 
   ngOnInit(): void {
     if (this.visaId) {

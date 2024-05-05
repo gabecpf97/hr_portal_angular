@@ -1,6 +1,8 @@
-<div class="visa_in_process">
-  <h3>In process Visa Request</h3>
-  <div *ngIf="theList$ | async as visaIds">
+<mat-card class="visa_in_process">
+  <mat-card-header>
+    <mat-card-title>In process Visa Request</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="visa_div" *ngIf="visaList as visaIds">
     <app-visa-item *ngFor="let id of visaIds" [visaId]="id"></app-visa-item>
-  </div>
-</div>
+  </mat-card-content>
+</mat-card>
