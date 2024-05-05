@@ -1,7 +1,7 @@
-<h2>Application {{ applicationId }}</h2>
+<h2>Application:  {{ applicationId }}</h2>
 
 <div class="header">
-    <h2>{{ applicationData.lastName }}, {{ applicationData.firstName }}</h2>
+    <h2>User: {{ applicationData.lastName }}, {{ applicationData.firstName }}</h2>
   </div>
   <mat-list class="profile-container">
     <mat-list-item>Picture: </mat-list-item>
@@ -12,7 +12,7 @@
       width="200"
       height="200"
     />
-    <mat-list-item>Status: {{applicationData.status }}</mat-list-item>
+    <mat-list-item>Status: {{ applicationData.status }}</mat-list-item>
     <mat-list-item>MiddleName: {{ applicationData.middleName || "N/A" }}</mat-list-item>
     <mat-divider></mat-divider>
     <mat-list-item>Email: {{ applicationData.email }}</mat-list-item>
@@ -55,13 +55,11 @@
         >Tymat-list-iteme: {{ applicationData.workAuthorization.type }}</mat-list-item
       >
       <mat-list-item>document: </mat-list-item>
-      <img
-        class="document-image"
-        [src]="applicationData.workAuthorization.document"
-        alt="Work Authorization Document"
-        width="200"
-        height="200"
-      />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ applicationData.workAuthorization.document }}" 
+        target="_blank" 
+        rel="noopener noreferrer">
+        Preview
+      </a>
       <mat-list-item
         >Start Date: {{ applicationData.workAuthorization.startDate }}</mat-list-item
       >
@@ -78,13 +76,11 @@
         {{ applicationData.driverLicense.expirationDate }}</mat-list-item
       >
       <mat-list-item>Document: </mat-list-item>
-      <img
-        class="document-image"
-        [src]="applicationData.driverLicense.document"
-        alt="Driver License Document"
-        width="200"
-        height="200"
-      />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ applicationData.driverLicense.document }}" 
+        target="_blank" 
+        rel="noopener noreferrer">
+        Preview
+      </a>
     </div>
   
     <mat-list-item>Reference:</mat-list-item>

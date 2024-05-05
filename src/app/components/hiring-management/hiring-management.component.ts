@@ -81,6 +81,15 @@ export class HiringManagementComponent implements OnInit {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`  
     });
+    if(!this.registrationName || !this.registrationEmail){
+      alert('Please fill in name and email!')
+      return
+    }
+    const re:RegExp = /\S+@\S+\.\S+/;
+    if(!re.test(this.registrationEmail)){
+      alert('Invalid Email!')
+      return
+    }
     const payload = {
       name: this.registrationName,
       email: this.registrationEmail
