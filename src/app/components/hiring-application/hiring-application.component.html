@@ -61,11 +61,11 @@
   <div style="margin-left: 20px">
     <mat-list-item
       >Tymat-list-iteme:
-      {{ applicationData.workAuthorization.type }}</mat-list-item
+      {{ applicationData.workAuthorization?.type }}</mat-list-item
     >
     <mat-list-item>document: </mat-list-item>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-      href="{{ applicationData.workAuthorization.document }}"
+      href="{{ applicationData.workAuthorization?.document }}"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -73,25 +73,25 @@
     </a>
     <mat-list-item
       >Start Date:
-      {{ applicationData.workAuthorization.startDate }}</mat-list-item
+      {{ applicationData.workAuthorization?.startDate }}</mat-list-item
     >
     <mat-list-item
-      >End Date: {{ applicationData.workAuthorization.endDate }}</mat-list-item
+      >End Date: {{ applicationData.workAuthorization?.endDate }}</mat-list-item
     >
   </div>
   <mat-divider></mat-divider>
   <mat-list-item>Driver License:</mat-list-item>
   <div style="margin-left: 20px">
     <mat-list-item
-      >Number: {{ applicationData.driverLicense.number }}</mat-list-item
+      >Number: {{ applicationData.driverLicense?.number }}</mat-list-item
     >
     <mat-list-item
       >Exmat-list-itemiration Date:
-      {{ applicationData.driverLicense.expirationDate }}</mat-list-item
+      {{ applicationData.driverLicense?.expirationDate }}</mat-list-item
     >
     <mat-list-item>Document: </mat-list-item>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-      href="{{ applicationData.driverLicense.document }}"
+      href="{{ applicationData.driverLicense?.document }}"
       target="_blank"
       rel="noopener noreferrer"
     >
