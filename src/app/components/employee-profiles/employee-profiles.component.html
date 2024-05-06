@@ -38,7 +38,7 @@
     <ng-container matColumnDef="workAuthorization">
       <th mat-header-cell *matHeaderCellDef>Work Authorization Title</th>
       <td mat-cell *matCellDef="let employee">
-        {{ employee.workAuthorization.type }}
+        {{ employee.workAuthorization?.type }}
       </td>
     </ng-container>
 
