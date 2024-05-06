@@ -48,15 +48,17 @@
     <mat-list-item>Color: {{ data.car.color }}</mat-list-item>
   </div>
   <mat-divider></mat-divider>
-  <mat-list-item>Work Authorization:</mat-list-item>
-  <div style="margin-left: 20px">
+  <mat-list-item *ngIf="data.workAuthorization"
+    >Work Authorization:</mat-list-item
+  >
+  <div style="margin-left: 20px" *ngIf="data.workAuthorization">
     <mat-list-item
       >Tymat-list-iteme: {{ data.workAuthorization.type }}</mat-list-item
     >
     <mat-list-item>document: </mat-list-item>
     <img
       class="document-image"
-      [src]="data.workAuthorization?.document"
+      [src]="data.workAuthorization.document"
       alt="Work Authorization Document"
       width="200"
       height="200"
@@ -69,8 +71,8 @@
     >
   </div>
   <mat-divider></mat-divider>
-  <mat-list-item>Driver License:</mat-list-item>
-  <div style="margin-left: 20px">
+  <mat-list-item *ngIf="data.driverLicense">Driver License:</mat-list-item>
+  <div style="margin-left: 20px" *ngIf="data.driverLicense">
     <mat-list-item>Number: {{ data.driverLicense.number }}</mat-list-item>
     <mat-list-item
       >Exmat-list-itemiration Date:
@@ -79,7 +81,7 @@
     <mat-list-item>Document: </mat-list-item>
     <img
       class="document-image"
-      [src]="data.driverLicense?.document"
+      [src]="data.driverLicense.document"
       alt="Driver License Document"
       width="200"
       height="200"
