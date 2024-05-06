@@ -4,7 +4,10 @@
   <div *ngIf="visa.OPTReceipt.status !== 'unuploaded'">
     <p>OPTReceipt:</p>
     <p>status: {{ visa.OPTReceipt.status }}</p>
-    <p>document: <img [src]="visa.OPTReceipt.document" /></p>
+    <p>document:</p>
+    <a mat-button [href]="visa.OPTReceipt.document" target="_blank"
+      >open document</a
+    >
     <p *ngIf="visa.OPTReceipt.status === 'rejected'">
       feedback: {{ visa.OPTReceipt.feedback }}
     </p>
@@ -29,7 +32,10 @@
   <div *ngIf="visa.OPTEAD.status !== 'unuploaded'">
     <p>OPTEAD:</p>
     <p>status: {{ visa.OPTEAD.status }}</p>
-    <p>document: <img [src]="visa.OPTEAD.document" /></p>
+    <p>document:</p>
+    <a mat-button [href]="visa.OPTEAD.document" target="_blank"
+      >open document</a
+    >
     <p *ngIf="visa.OPTEAD.status === 'rejected'">
       feedback: {{ visa.OPTEAD.feedback }}
     </p>
@@ -53,7 +59,8 @@
   <div *ngIf="visa.I983.status !== 'unuploaded'">
     <p>I983:</p>
     <p>status: {{ visa.I983.status }}</p>
-    <p>document: <img [src]="visa.I983.document" /></p>
+    <p>document:</p>
+    <a mat-button [href]="visa.I983.document" target="_blank">open document</a>
     <p *ngIf="visa.I983.status === 'rejected'">
       feedback: {{ visa.I983.feedback }}
     </p>
@@ -77,7 +84,8 @@
   <div *ngIf="visa.I20.status !== 'unuploaded'">
     <p>I20:</p>
     <p>status: {{ visa.I20.status }}</p>
-    <p>document: <img [src]="visa.I20.document" /></p>
+    <p>document:</p>
+    <a mat-button [href]="visa.I20.document" target="_blank">open document</a>
     <p *ngIf="visa.I20.status === 'rejected'">
       feedback: {{ visa.I20.feedback }}
     </p>

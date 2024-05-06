@@ -2,12 +2,11 @@
   <mat-card-header>
     <mat-card-title>All Visa Request</mat-card-title>
   </mat-card-header>
-  <form [formGroup]="form" (ngSubmit)="handleSearch()">
+  <form [formGroup]="form">
     <mat-form-field>
       <mat-label>Search: </mat-label>
       <input matInput type="text" formControlName="query" />
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Search</button>
   </form>
   <mat-card-content class="visa_div">
     <app-visa-item

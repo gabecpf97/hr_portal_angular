@@ -25,12 +25,9 @@ export class VisaAllSearchComponent implements OnInit {
     this.form = this.fb.group({
       query: ['', Validators.required],
     });
-  }
-
-  handleSearch(): void {
-    this.visaList$ = this.store.pipe(
-      select(selectByName(this.form.get('query')?.value))
-    );
+    this.form.get('query')?.valueChanges.subscribe((value) => {
+      this.visaList$ = this.store.pipe(select(selectByName(value)));
+    });
   }
 
   ngOnInit(): void {
